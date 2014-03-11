@@ -1,0 +1,36 @@
+<?php
+	$_product = $this->getProduct();
+	$_helper = Mage::helper('giftwrap');
+	$icon_image = $_helper->getGiftwrapIcon();	
+	$show_icon = $_helper->showIcon();
+	if ($show_icon):
+?>
+	<div class="giftwrap_icon" id="giftwrap_icon">
+		<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'giftwrap/icon/' . $icon_image?>" />
+		&nbsp;&nbsp;<b><?php echo $this->__('Gift Wrap');?></b>
+	</div>
+	<div id="giftwrap_information" class="giftwrap_tooltip giftwrap_protoClassic" style="visibility: visible;">
+		<div class="giftwrap_toolbar" style="width: 100%;">
+			<div class="title" style="">
+				<?php echo $this->__('Gift Wrap Information');?>
+			</div>
+		</div>
+		<div class="content">
+			<?php 
+			$toolTipText = '';			
+			if (Mage::helper('giftwrap')->isGiftwrap($_product)){
+				$toolTipText = $this->getGiftWrapToolTip();
+				echo $this->htmlEscape($toolTipText);
+			} else {
+				$toolTipText = $this->getNoGiftWrapToolTip();
+				echo $this->htmlEscape($toolTipText);
+			}
+			?>
+		</div>
+	</div>
+<script type="text/javascript">
+    var wrapTip = new Tooltip('giftwrap_icon', 'giftwrap_information');
+</script>
+<?php
+	endif;
+?>

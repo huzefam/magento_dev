@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Neo_Huzefa>
+			<version>0.0.1</version>
+		</Neo_Huzefa>
+	</modules>
+     <frontend>
+        <routers>
+	 <huzefa>
+		<use>standard</use>
+			<args>
+				<module>Neo_Huzefa</module>
+				<frontName>huzefa</frontName>
+			</args>
+        </huzefa>
+	</routers>
+         <events>
+            <controller_front_init_routers>
+                <observers>
+                    <Huzefa_configviewer_model_observer>
+                        <type>singleton</type>
+                        <class>Neo_Huzefa_Model_Observer</class>
+                        <method>checkForConfigRequest</method>
+                    </Huzefa_configviewer_model_observer>
+                </observers>
+            </controller_front_init_routers>
+          <customer_register_success>
+                <observers>
+                    <Huzefa_configviewer_model_observer>
+                        <type>singleton</type>
+                        <class>Neo_Huzefa_Model_Observer</class>
+                        <method>customerRegisterSuccess</method>
+                    </Huzefa_configviewer_model_observer>
+                </observers>
+            </customer_register_success>
+        </events>
+ <layout>
+            <updates>
+                <moneybookers>
+                    <file>moneybookers.xml</file>
+                </moneybookers>
+            </updates>
+        </layout>
+</frontend>
+     <global>
+    <!--models>
+       
+        <huzefa>
+            <class>Neo_Huzefa_Model</class>
+        </huzefa>
+
+    </models-->
+        
+     </global>
+
+</config>

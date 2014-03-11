@@ -1,0 +1,15 @@
+####################################################################
+# Streams from magento to logistic:
+- Sales order (5 files: header, information, items, remarks, specific information)
+- Purchase order (Header, Items)
+- Products
+
+####################################################################
+# Streams from logistic to magento:
+- Shipping confirmation (header, items, Parcel header, Parcel details lines)
+- [purchase order deliveries]
+- [stock summary]
+- [stock movement]
+
+
+

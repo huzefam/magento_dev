@@ -1,0 +1,67 @@
+<div class="entry-edit">
+
+<div class="content-header">
+    <table cellspacing="0" class="grid-header">
+        <tr>
+            <td><h3><?php echo $this->__('View History')?></h3></td>
+            <td align="right">
+                <button onclick="document.location.href='<?php echo $this->getUrl('ExternalLogistic/History/Grid'); ?>'" class="scalable back" type="button"><span><?php echo $this->__('Back')?></span></button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="entry-edit">
+    
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="form-list">
+                <tr>
+                    <td class="label"><?php echo $this->__('Id'); ?></td>
+                    <td class="input-ele"><?php echo $this->getHistory()->getId(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Code'); ?></td>
+                    <td class="input-ele"><?php echo $this->getHistory()->getelh_stream_code(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Company'); ?></td>
+                    <td class="input-ele"><?php echo $this->getHistory()->getelh_company_code(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Date'); ?></td>
+                    <td class="input-ele"><?php echo $this->getHistory()->getelh_date(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Description'); ?></td>
+                    <td class="input-ele"><?php echo $this->getHistory()->getelh_description(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Result'); ?></td>
+                    <td class="input-ele"><?php echo $this->getHistory()->getelh_result(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Logistic stream code'); ?></td>
+                    <td class="input-ele"><?php echo $this->getHistory()->getelh_logistic_stream_code(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Error'); ?></td>
+                    <td class="input-ele"><?php echo $this->getHistory()->getelh_has_error(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Confirmed'); ?></td>
+                    <td class="input-ele"><?php echo $this->getHistory()->getelh_confirmed(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Entity ids'); ?></td>
+                    <td class="input-ele"><?php echo $this->getHistory()->getelh_entity_ids(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label"><?php echo $this->__('Files'); ?></td>
+                    <td class="input-ele"><a href="<?php echo Mage::helper('adminhtml')->getUrl('ExternalLogistic/History/Download', array('elh_id' => $this->getHistory()->getelh_id())) ?>">Download</a></td>
+                </tr>
+            </table>
+        </fieldset>
+
+</div>
+
+</div>

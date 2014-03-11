@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+        
+    <!-- History -->
+
+    <externallogistic_history_grid>
+        <reference name="content">
+            <block type="ExternalLogistic/History_Grid" name="history_grid" template="ExternalLogistic/History/Grid.phtml" />
+        </reference>
+    </externallogistic_history_grid>
+    
+    <externallogistic_history_view>
+        <reference name="content">
+            <block type="ExternalLogistic/History_View" name="history_view" template="ExternalLogistic/History/View.phtml" />
+        </reference>
+    </externallogistic_history_view>
+    
+    <!-- Streams -->
+    
+    <externallogistic_streams_grid>
+        <reference name="content">
+            <block type="ExternalLogistic/Streams_Grid" name="streams_grid" template="ExternalLogistic/Streams/Grid.phtml" />
+        </reference>
+    </externallogistic_streams_grid>
+
+    <externallogistic_streams_edit>
+        <reference name="left">
+            <block type="ExternalLogistic/Streams_Edit_Tabs" name="streams_tabs">
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="ExternalLogistic/Streams_Edit" name="streams_edit"></block>
+        </reference>
+    </externallogistic_streams_edit>
+
+    <!-- sources -->
+    <externallogistic_sources_grid>
+        <reference name="content">
+            <block type="ExternalLogistic/Sources_Grid" name="sources_grid" template="ExternalLogistic/Sources/Grid.phtml" />
+        </reference>
+    </externallogistic_sources_grid>
+    
+    <externallogistic_sources_edit>
+        <reference name="content">
+            <block type="ExternalLogistic/Sources_Edit" name="sources_edit" template="ExternalLogistic/Sources/Edit.phtml" />
+        </reference>
+    </externallogistic_sources_edit>
+
+    <!-- Sales order -->
+    <adminhtml_sales_order_view>
+        <reference name="sales_order_tabs">
+            <action method="addTab">
+                <name>external_logistic</name>
+                <block>ExternalLogistic/Adminhtml_Sales_Order_View_Tab_ExternalLogistic</block>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+    
+    <externallogistic_salesorder_grid>
+        <reference name="content">
+            <block type="ExternalLogistic/SalesOrder_Grid" name="salesorder_grid" template="ExternalLogistic/SalesOrder/Grid.phtml" />
+        </reference>
+    </externallogistic_salesorder_grid>
+
+    <!-- products -->
+    <externallogistic_product_grid>
+        <reference name="content">
+            <block type="ExternalLogistic/Product_Grid" name="product_grid" template="ExternalLogistic/Product/Grid.phtml" />
+        </reference>
+    </externallogistic_product_grid>
+    
+    <!-- purchaseorder -->
+    <externallogistic_purchaseorder_grid>
+        <reference name="content">
+            <block type="ExternalLogistic/PurchaseOrder_Grid" name="purchase_order_grid" template="ExternalLogistic/PurchaseOrder/Grid.phtml" />
+        </reference>
+    </externallogistic_purchaseorder_grid>
+
+</layout>

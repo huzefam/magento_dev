@@ -1,0 +1,171 @@
+<?php
+class Neo_Huzefa_IndexController extends Mage_Core_Controller_Front_Action
+{
+  public function indexAction() {
+    $this->loadLayout();
+    $this->renderLayout();
+  }
+
+  public function addproductAction() {
+
+$data = $this->getRequest()->getPost();
+
+  if($data) {
+   // $sProduct is the object used for product creation
+    $sProduct = Mage::getModel('catalog/product');
+    $productData=array(
+                  'name' => $data['name'],
+                  'sku' => $data['sku'],
+                  'description' => $data['description'],
+                  'short_description' => $data['description'],
+                  'weight' =>1, // whatever your product weighs
+                  'status' => $data['status'], // 1 =&gt; enabled, 0 =&gt; disabled
+                  'visibility' => '4', // 1 =&gt; Not Visible Individually, 2 =&gt; Catalog, 3 =&gt; Search, 4 =&gt; Catalog, Search
+                  'attribute_set_id' => 4, // default
+                  'type_id' => 'simple',
+                  'price' => $data['price'],
+                  'tax_class_id' => 0, // None
+
+    );
+    // traversing through each index of productData
+    foreach($productData as $key => $value)
+    {
+        $sProduct->setData($key,$value); 
+    }
+ 
+    $sProduct->setData('color',$this->getOptionId('color',$data['color']));
+   
+ 
+    $sProduct->setWebsiteIds(array(1));
+
+   $sProduct->setStockData(array(
+                              'manage_stock' => 1,
+                              'is_in_stock' => 1,
+                              'qty' => 10,
+                              'use_config_manage_stock' => 0
+    ));
+    $categoryIds = array(2,3); // Use category ids according to your store
+    $sProduct->setCategoryIds($categoryIds);
+
+
+    // use the directory path to images you want to save for the product
+   try {
+    // and finally you can call the save method to create the product
+    $sProduct->save();
+    echo "Pheww, Product saved Hurray :D";
+// we are creating an array with some information which will be used to bind the simple products with the configurable
+        array_push(
+                $simpleProducts,
+                array(
+                    "id" => $sProduct->getId(),
+                    "price" => $sProduct->getPrice(),
+                    "attr_code" => 'color',
+                    "attr_id" => 92, // i have used the hardcoded attribute id of attribute size, you must change according to your store
+                    "value" => $this->getOptionId('color',$data['color']),
+                    "label" => $sProduct['color'],
+                )
+            );
+   $cProduct = Mage::getModel('catalog/product');
+
+          $productData=array('name' => 'Main configurable Tshirt',
+                       'sku' => 'tshirt_sku',
+                       'description' => 'Clear description about your Tshirt that explains its features',
+                       'short_description' => 'One liner',
+                       'weight' => 1,
+                       'status' => '1',
+                       'visibility' => '4',
+                       'attribute_set_id' => 4,
+                       'type_id' => 'configurable',
+                       'price' => 1200,
+                       'tax_class_id' => 0,
+                );
+    foreach($productData as $key =&gt; $value)
+    {
+    	$cProduct->setData($key,$value);
+    }
+    $cProduct->setWebsiteIds(array(1));
+    $cProduct->setStockData(array(
+    		'manage_stock' => 1,
+                'is_in_stock' => 1,
+                'qty' => 0,
+                'use_config_manage_stock' => 0
+        ));
+    $cProduct->setCategoryIds(array(2,3));
+
+    $cProduct->setCanSaveConfigurableAttributes(true);
+    $cProduct->setCanSaveCustomOptions(true);
+ 
+        $cProductTypeInstance = $cProduct->getTypeInstance();
+        $attribute_ids = array(92);
+        $cProductTypeInstance->setUsedProductAttributeIds($attribute_ids);
+        $attributes_array = $cProductTypeInstance->getConfigurableAttributesAsArray();
+        foreach($attributes_array as $key => $attribute_array) 
+        {
+            $attributes_array[$key]['use_default'] = 1;
+            $attributes_array[$key]['position'] = 0;
+ 
+            if (isset($attribute_array['frontend_label']))
+            {
+                $attributes_array[$key]['label'] = $attribute_array['frontend_label'];
+            }
+            else {
+                $attributes_array[$key]['label'] = $attribute_array['attribute_code'];
+            }
+        }
+        // Add it back to the configurable product..
+        $cProduct->setConfigurableAttributesData($attributes_array);
+ 
+        $dataArray = array();
+        foreach ($simpleProducts as $simpleArray)
+        {
+            $dataArray[$simpleArray['id']] = array();
+            foreach ($attributes_array as $key => $attrArray)
+            {
+                array_push(
+                    $dataArray[$simpleArray['id']],
+                    array(
+                        "attribute_id" => $simpleArray['attr_id'][$key],
+                        "label" => $simpleArray['label'][$key],
+                        "is_percent" => 0,
+                        "pricing_value" => $simpleArray['pricing_value'][$key]
+                    )
+                );
+            }
+        }
+        $cProduct->setConfigurableProductsData($dataArray);
+        $cProduct->save();
+        echo "Wohoooo! Product saved"; 
+}
+catch(Exception $e) {
+  echo $e;
+}
+    
+ 
+    exit();
+  }
+}
+
+/** returns the option id for any attribute code by passing the label 
+    $attribute_code e.g. 'size','color','article'         $label e.g. 'M','Red','art_21312'     */
+
+     function getOptionId($attribute_code,$label)     {    
+        $attribute_model = Mage::getModel('eav/entity_attribute');  
+       $attribute_options_model= Mage::getModel('eav/entity_attribute_source_table') ;   
+      $attribute_code = $attribute_model->getIdByCode('catalog_product', $attribute_code);
+        $attribute = $attribute_model->load($attribute_code);
+ 
+        $attribute_table = $attribute_options_model->setAttribute($attribute);
+        $options = $attribute_options_model->getAllOptions(false);
+ 
+        foreach($options as $option)
+        {
+            if ($option['label'] == $label)
+            {
+                $optionId=$option['value'];
+                break;
+            }
+        }
+        return $optionId;
+    }
+   
+  }

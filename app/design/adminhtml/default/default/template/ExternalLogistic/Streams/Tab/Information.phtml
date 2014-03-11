@@ -1,0 +1,30 @@
+<?php $_stream = $this->getStream(); ?>
+
+<input type="hidden" id="data[els_id]" name="data[els_id]" value="<?php echo $_stream->getId(); ?>">
+
+<div class="entry-edit">
+    <div class="entry-edit-head"> 
+	    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Information'); ?></h4> 
+    </div>
+    <fieldset id="my-fieldset">
+        <table cellspacing="0" class="form-list">
+            <tr>
+                <td class="label"><?php echo $this->__('Code'); ?></td>
+                <td class="input-ele"><?php echo $_stream->getels_code(); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><?php echo $this->__('Name'); ?></td>
+                <td class="input-ele"><?php echo $_stream->getels_name(); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><?php echo $this->__('Direction'); ?></td>
+                <td class="input-ele"><?php echo ($_stream->getels_direction() == 0 ? 'Magento to logistic' : 'Logistic to Magento'); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><?php echo $this->__('Active'); ?></td>
+                <td class="input-ele"><?php echo $this->getActiveAsCombo('data[els_is_active]', $_stream->getels_is_active()); ?></td>
+            </tr>
+           
+		</table>
+	</fieldset>
+</div>

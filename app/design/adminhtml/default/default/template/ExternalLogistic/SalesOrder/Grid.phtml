@@ -1,0 +1,17 @@
+
+<div class="entry-edit">
+
+<div class="content-header">
+    <table cellspacing="0" class="grid-header">
+        <tr>
+            <td><h3><?php echo $this->__('Sales Order')?></h3></td>
+        </tr>
+    </table>
+</div>
+
+<form method="POST" action="<?php echo $this->getSubmitUrl()?>" name="edit_form" id="edit_form">
+<input id="form_key" name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+<?php echo $this->getGridParentHtml() ?>
+</form>
+
+</div>

@@ -1,0 +1,33 @@
+
+<div class="content-header">
+    <table cellspacing="0" class="grid-header">
+        <tr>
+            <td><h3><?php echo $this->__('Edit Source')?></h3></td>
+            <td align="right">
+                <button onclick="document.getElementById('edit_form').submit()" class="scalable save" type="button"><span><?php echo $this->__('Save')?></span></button>            
+            </td>
+        </tr>
+    </table>
+</div>
+
+<form id="edit_form" name="edit_form" method="post" action="<?php echo $this->getSubmitUrl()?>">
+<input id="form_key" name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+<input id="elsrc_id" name="elsrc_id" type="hidden" value="<?php echo $this->getSource()->getId(); ?>" />
+<div class="entry-edit">
+<fieldset id="my-fieldset">
+            <table cellspacing="0"class="form-list">
+                <tr>
+                    <td class="label" width="20%"><?php echo $this->__('Code'); ?> </td>
+                    <td class="input-ele" width="80%"><?php echo $this->getSource()->getelsrc_code(); ?></td>
+                </tr>
+                <tr>
+                    <td class="label" width="20%"><?php echo $this->__('Name'); ?> </td>
+                    <td class="input-ele" width="80%"><?php echo $this->getSource()->getelsrc_name(); ?></td>
+                </tr>
+            </table>
+</fieldset>
+
+<?php echo $this->getFieldset(); ?>
+
+</div>
+</form>

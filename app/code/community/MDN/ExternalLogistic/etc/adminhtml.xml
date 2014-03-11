@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<config>
+
+            
+    <menu>
+        <erp>
+            <title>ERP</title>
+            <sort_order>500</sort_order>
+            <children>
+                <externallogistic translate="title" module="ExternalLogistic">
+                    <title>External Logistic</title>
+                    <sort_order>500</sort_order>
+                    <children>
+                        <sales_order translate="title" module="ExternalLogistic">
+                            <title>Sales Order</title>
+                            <action>ExternalLogistic/SalesOrder/Grid</action>
+                            <sort_order>1</sort_order>
+                        </sales_order>
+                        <product translate="title" module="ExternalLogistic">
+                            <title>Product</title>
+                            <action>ExternalLogistic/Product/Grid</action>
+                            <sort_order>1</sort_order>
+                        </product>
+                        <purchase_order translate="title" module="ExternalLogistic">
+                            <title>Purchase Order</title>
+                            <action>ExternalLogistic/PurchaseOrder/Grid</action>
+                            <sort_order>1</sort_order>
+                        </purchase_order>
+
+                        <streams translate="title" module="ExternalLogistic">
+                            <title>Streams</title>
+                            <action>ExternalLogistic/Streams/Grid</action>
+                            <sort_order>4</sort_order>
+                        </streams>
+                                <!--
+                        	<sources translate="title" module="ExternalLogistic">
+		                        <title>Sources</title>
+		                        <action>ExternalLogistic/Sources/Grid</action>                    	
+		                        <sort_order>2</sort_order>
+                        	</sources>
+                                -->
+                        <history translate="title" module="ExternalLogistic">
+                            <title>View History</title>
+                            <action>ExternalLogistic/History/Grid</action>
+                            <sort_order>5</sort_order>
+                        </history>
+                    </children>
+                </externallogistic>
+            </children>
+        </erp>
+    </menu>
+
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <erp>
+                        <title>ERP</title>
+                        <children>
+                            <externallogistic module="ExternalLogistic">
+                                <title>External Logistic</title>
+                                <children>
+                                    <sales_order module="ExternalLogistic">
+                                        <title>Sales Order</title>
+                                    </sales_order>
+                                    <product module="ExternalLogistic">
+                                        <title>Product</title>
+                                    </product>
+                                    <purchase_order module="ExternalLogistic">
+                                        <title>Purchase Order</title>
+                                    </purchase_order>
+                                    <sources module="ExternalLogistic">
+                                        <title>Sources</title>
+                                    </sources>
+                                    <streams module="ExternalLogistic">
+                                        <title>Streams</title>
+                                    </streams>
+                                    <history module="ExternalLogistic">
+                                        <title>View History</title>
+                                    </history>
+                                </children>
+                            </externallogistic>
+                        </children>
+                    </erp>
+	                	
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <externallogistic module="ExternalLogistic">
+                                        <title>External Logistic</title>
+                                    </externallogistic>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+
+                </children>
+            </admin>
+        </resources>
+    </acl>
+        
+    <layout>
+        <updates>
+            <ExternalLogistic>
+                <file>ExternalLogistic.xml</file>
+            </ExternalLogistic>
+        </updates>
+    </layout>
+        	    
+    <translate>
+        <modules>
+            <MDN_ExternalLogistic>
+                <files>
+                    <default>MDN_ExternalLogistic.csv</default>
+                </files>
+            </MDN_ExternalLogistic>
+        </modules>
+    </translate>
+
+</config>

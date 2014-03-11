@@ -1,0 +1,25 @@
+<div class="entry-edit">
+    <div class="entry-edit-head"> 
+	    <h4 class="icon-head head-edit-form fieldset-legend">General</h4> 
+    </div>
+    <fieldset id="my-fieldset">
+    	<form method="POST" action="<?php echo $this->getSendOrderToLogisticUrl(); ?>">
+    		<input id="form_key" name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+    		<input type="hidden" name="order_id" id="order_id" value="<?php echo $this->getOrder()->getId(); ?>">
+	        <table cellspacing="0" class="form-list">
+            <tr>
+                <td class="label"><?php echo $this->__('Sent to logistic company'); ?></td>
+                <td class="input-ele"><?php echo ($this->isSentToLogisticCompany() ? $this->__('Yes') : $this->__('No')); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><?php echo $this->__('Confirmed by logistic company'); ?></td>
+                <td class="input-ele"><?php echo ($this->isConfirmed() ? $this->__('Yes') : $this->__('No')); ?></td>
+            </tr>
+			<tr>
+				<td class="label"><?php echo $this->__('Stream information'); ?></td>
+				<td class="input-ele"><?php echo $this->getStreamInformation(); ?></td>
+			</tr>
+			</table>
+		</form>
+	</fieldset>
+</div>

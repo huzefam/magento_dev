@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <magestore translate="label">
+            <label>Magestore Extension</label>
+            <sort_order>400</sort_order>
+        </magestore>
+    </tabs>
+    <sections>
+        <giftwrap translate="label" module="giftwrap">
+            <class>separator-top</class>
+            <label>Gift Wrap</label>
+            <tab>magestore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+				<general translate="label">
+					<label>General Configuration</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>0</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enable Giftwrap Module</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<giftwrap_template>
+							<label>Select style for giftwrap</label>
+							<frontend_type>select</frontend_type>
+							<source_model>giftwrap/system_config_source_styles</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</giftwrap_template>
+						<use_card translate="label">
+							<label>Allow using gift card</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</use_card>
+						<confirm_delete translate="label">
+							<label>Require confirmation when deleting Giftwrap</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>35</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</confirm_delete>
+						<show_icon translate="label">
+							<label>Show Giftwrap icon on product page</label>										
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_icon>
+						<icon_image translate="label comment">
+								<label>Giftwrap Icon </label>
+								<frontend_type>image</frontend_type>
+								<backend_model>adminhtml/system_config_backend_image_pdf</backend_model>
+								<upload_dir config="system/filesystem/media" scope_info="1">giftwrap/icon</upload_dir>
+								<base_url type="media" scope_info="1">giftwrap/icon</base_url>
+								<sort_order>50</sort_order>
+								<show_in_default>1</show_in_default>
+								<show_in_website>1</show_in_website>
+								<show_in_store>0</show_in_store>
+								<comment><![CDATA[Gift wrap icon, will be used in product page (jpeg, tiff, png)]]></comment>
+						</icon_image>
+						<amount_on_number_items translate="label">
+							<label>Calculate Giftwrap fee based on number of items</label>										
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</amount_on_number_items>
+						<!-- all_item translate="label comment">
+							<label>Wrap all items in one pager</label>
+							<comment><![CDATA[Wrap all items which are able to wrapped]]></comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</all_item-->											
+						<!-- amount_on_number_items translate="label">
+							<label>Calculate gift wrap amount based on number of items</label>										
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</amount_on_number_items-->
+						<!-- decrease_price_wrapall translate="label">
+							<label>Decrease price when wrap all items</label>										
+							<frontend_type>text</frontend_type>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</decrease_price_wrapall-->
+						<maximum_items_wrapall translate="label comment">
+							<label>Maximum items per gift box</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</maximum_items_wrapall>
+						<use_urls translate="label">
+							<label>Use URLs on frontend</label>										
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</use_urls>
+						<add_product_price translate="label">
+							<label>Add giftwrap price to product price</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>90</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</add_product_price>
+					</fields> 
+				</general>		
+				<message translate="label">
+					<label>Message Configuration</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<product_giftwrap translate="label comment">
+							<label>Tooltip for products which can be gift-wrapped</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_giftwrap>
+						<product_no_giftwrap translate="label comment">
+							<label>Tooltip for products which cannot be gift-wrapped</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_no_giftwrap>
+						<all_item_giftwrap translate="label comment">
+							<label>Tooltip for gift wrap all item in shopping cart</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</all_item_giftwrap>
+						<!-- personal_message_disable_msg translate="label comment">
+							<label>Notification when personal message is turned off</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>8</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</personal_message_disable_msg-->
+						<!-- can_not_wrap_all>
+							<label>Error message shows when then number of wrap items is greater than maximum number</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>7</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</can_not_wrap_all-->
+					</fields>
+				</message>			
+				<tax translate="label">
+					<label>Tax Configuration</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>5</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enable Tax for Giftwrap</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+					</fields> 
+				</tax>
+                <note translate="label">
+                    <label>Note Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>11</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+                    <fields>
+						<first translate="label">
+							<label>First Note</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</first>
+                        <enable_note translate="label">
+                            <label>Enable Note 2,3</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>                            
+                            <comment><![CDATA[You should choose No if note 2 & 3 do not exist.]]></comment>
+                        </enable_note>
+                        <second translate="label">
+							<label>Second Note</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</second>
+                        <third translate="label">
+							<label>Third Note</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>7</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</third>
+                        <first_hover translate="label">
+                            <label>Tooltip for entering message</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>8</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </first_hover>
+                        <second_hover translate="label">
+                            <label>Tooltip for wrapping the chosen item only</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>9</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </second_hover>
+                        <third_hover translate="label">
+                            <label>Tooltip for choosing other products on shopping cart for wrapping.</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </third_hover>
+                        <four_hover translate="label">
+                            <label>Tooltip for Qty already wrapped/ Total </label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>11</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </four_hover>
+                        <five_hover translate="label">
+                            <label>Tooltip for Qty that will be wrapped</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>12</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </five_hover>
+                        <six_hover translate="label">
+                            <label>Tooltip for ticking to wrap</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>13</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                        </six_hover>
+					</fields> 
+                </note>
+            </groups>
+        </giftwrap>
+		<sales>
+			<groups>
+				<totals_sort>
+					<fields>
+						<giftwrap translate="label">
+							<label>Giftwrap</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</giftwrap>
+					</fields>
+				</totals_sort>
+			</groups>
+		</sales>
+    </sections>
+</config>

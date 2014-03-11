@@ -1,0 +1,7 @@
+<nav class="mini-account right">
+    <?php if($this->helper('customer')->isLoggedIn()): ?>
+        <a class="button tiny" href="<?php echo $this->getUrl('customer/account/logout') ?>"><?php echo $this->__('Log out') ?></a>
+    <?php else: ?>
+        <a class="button tiny" href="<?php echo $this->getUrl('customer/account/login') ?>"><?php echo $this->__('Log in') ?></a>
+    <?php endif; ?>
+</nav>

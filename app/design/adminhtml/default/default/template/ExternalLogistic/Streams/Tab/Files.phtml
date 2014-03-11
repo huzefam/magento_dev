@@ -1,0 +1,29 @@
+<?php $_stream = $this->getStream(); ?>
+
+<?php foreach ($_stream->getFiles() as $_file): ?>
+	<div class="entry-edit">
+	    <div class="entry-edit-head"> 
+		    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('File #%s', $_file->getId()); ?></h4> 
+	    </div>
+	    <fieldset id="my-fieldset">
+	        <table cellspacing="0" class="form-list">
+	            <tr>
+	                <td class="label"><?php echo $this->__('Delete'); ?></td>
+	                <td class="input-ele"><input type="checkbox" name="files[<?php echo $_file->getId(); ?>][delete]" id="files[<?php echo $_file->getId(); ?>][delete]" value="1"></td>
+	            </tr>
+	            <tr>
+	                <td class="label"><?php echo $this->__('Description'); ?></td>
+	                <td class="input-ele"><input type="text" size="50" name="files[<?php echo $_file->getId(); ?>][elf_description]" id="files[<?php echo $_file->getId(); ?>][elf_description]" value="<?php echo $_file->getelf_description(); ?>"></td>
+	            </tr>
+	            <tr>
+	                <td class="label"><?php echo $this->__('File name'); ?></td>
+	                <td class="input-ele"><input type="text" size="50" name="files[<?php echo $_file->getId(); ?>][elf_filename]" id="files[<?php echo $_file->getId(); ?>][elf_filename]" value="<?php echo $_file->getelf_filename(); ?>"></td>
+	            </tr>
+	            <tr>
+	                <td class="label"><?php echo $this->__('Template'); ?></td>
+	                <td class="input-ele"><textarea cols="80" rows="15" name="files[<?php echo $_file->getId(); ?>][elf_template]" id="files[<?php echo $_file->getId(); ?>][elf_template]"><?php echo $_file->getelf_template(); ?></textarea></td>
+	            </tr>
+			</table>
+		</fieldset>
+	</div>
+<?php endforeach; ?>

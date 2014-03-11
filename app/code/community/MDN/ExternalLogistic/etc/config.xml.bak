@@ -1,0 +1,313 @@
+<?xml version="1.0"?>
+<config>
+
+    <modules>
+        <MDN_ExternalLogistic>
+            <version>1.5.4</version>
+        </MDN_ExternalLogistic>
+    </modules>
+    
+    <global>
+        <helpers>
+            <ExternalLogistic>
+                <class>MDN_ExternalLogistic_Helper</class>
+            </ExternalLogistic>
+        </helpers>
+        
+        <blocks>
+            <ExternalLogistic>
+                <class>MDN_ExternalLogistic_Block</class>
+            </ExternalLogistic>
+            <!--
+            <Purchase>
+                <rewrite>
+                    <Order_Grid>MDN_ExternalLogistic_Block_Adminhtml_Purchase_Order_Grid</Order_Grid>
+                </rewrite>
+            </Purchase>
+            -->
+            <adminhtml>
+                <rewrite>
+                    <catalog_product_edit_tabs>MDN_ExternalLogistic_Block_Product_Edit_Tabs</catalog_product_edit_tabs>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+         
+        <models>
+            <ExternalLogistic>
+                <class>MDN_ExternalLogistic_Model</class>
+                <resourceModel>ExternalLogistic_mysql4</resourceModel>
+            </ExternalLogistic>
+            <ExternalLogistic_mysql4>
+                <class>MDN_ExternalLogistic_Model_Mysql4</class>
+                <!-- defini les tables utilisables -->
+                <entities>
+                    <History>
+                        <table>external_logistic_history</table>
+                    </History>
+                    <Streams>
+                        <table>external_logistic_streams</table>
+                    </Streams>
+                    <Sources>
+                        <table>external_logistic_sources</table>
+                    </Sources>
+                    <Parameters>
+                        <table>external_logistic_parameters</table>
+                    </Parameters>
+                    <CustomInformation>
+                        <table>external_logistic_custom_information</table>
+                    </CustomInformation>
+                </entities>
+            </ExternalLogistic_mysql4>
+        </models>
+        
+        <resources>
+            <ExternalLogistic_setup>
+                <setup>
+                    <module>MDN_ExternalLogistic</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </ExternalLogistic_setup>
+            <ExternalLogistic_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </ExternalLogistic_write>
+            <ExternalLogistic_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </ExternalLogistic_read>
+        </resources>
+        
+        <events>
+            <purchase_order_status_changed>
+                <observers>
+                    <ExternalLogistic>
+                        <type>singleton</type>
+                        <class>ExternalLogistic/ErpObserver</class>
+                        <method>purchase_order_status_changed</method>
+                    </ExternalLogistic>
+                </observers>
+            </purchase_order_status_changed>
+            <salesorder_grid_preparemassaction>
+                <observers>
+                    <ExternalLogistic>
+                        <type>singleton</type>
+                        <class>ExternalLogistic/ErpObserver</class>
+                        <method>salesorder_grid_preparemassaction</method>
+                    </ExternalLogistic>
+                </observers>
+            </salesorder_grid_preparemassaction>
+            <purchase_order_edit_create_tabs>
+                <observers>
+                    <ExternalLogistic>
+                        <type>singleton</type>
+                        <class>ExternalLogistic/ErpObserver</class>
+                        <method>purchase_order_edit_create_tabs</method>
+                    </ExternalLogistic>
+                </observers>
+            </purchase_order_edit_create_tabs>
+            <salesorder_grid_preparecolumns>
+                <observers>
+                    <ExternalLogistic>
+                        <type>singleton</type>
+                        <class>ExternalLogistic/ErpObserver</class>
+                        <method>salesorder_grid_preparecolumns</method>
+                    </ExternalLogistic>
+                </observers>
+            </salesorder_grid_preparecolumns>
+        </events>
+        
+    </global>
+    
+    <adminhtml>
+            
+        <menu>
+            <erp>
+                <title>ERP</title>
+                <sort_order>500</sort_order>
+                <children>
+                    <externallogistic translate="title" module="ExternalLogistic">
+                        <title>External Logistic</title>
+                        <sort_order>500</sort_order>
+                        <children>
+                            <sales_order translate="title" module="ExternalLogistic">
+                                <title>Sales Order</title>
+                                <action>ExternalLogistic/SalesOrder/Grid</action>
+                                <sort_order>1</sort_order>
+                            </sales_order>
+                            <product translate="title" module="ExternalLogistic">
+                                <title>Product</title>
+                                <action>ExternalLogistic/Product/Grid</action>
+                                <sort_order>1</sort_order>
+                            </product>
+                            <purchase_order translate="title" module="ExternalLogistic">
+                                <title>Purchase Order</title>
+                                <action>ExternalLogistic/PurchaseOrder/Grid</action>
+                                <sort_order>1</sort_order>
+                            </purchase_order>
+
+                            <streams translate="title" module="ExternalLogistic">
+                                <title>Streams</title>
+                                <action>ExternalLogistic/Streams/Grid</action>
+                                <sort_order>4</sort_order>
+                            </streams>
+                            <!--
+                            <sources translate="title" module="ExternalLogistic">
+                                <title>Sources</title>
+                                <action>ExternalLogistic/Sources/Grid</action>
+                                <sort_order>2</sort_order>
+                            </sources>
+                            -->
+                            <history translate="title" module="ExternalLogistic">
+                                <title>View History</title>
+                                <action>ExternalLogistic/History/Grid</action>
+                                <sort_order>5</sort_order>
+                            </history>
+                        </children>
+                    </externallogistic>
+                </children>
+            </erp>
+        </menu>
+
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <erp>
+                            <title>ERP</title>
+                            <children>
+                                <externallogistic module="ExternalLogistic">
+                                    <title>External Logistic</title>
+                                    <children>
+                                        <sales_order module="ExternalLogistic">
+                                            <title>Sales Order</title>
+                                        </sales_order>
+                                        <product module="ExternalLogistic">
+                                            <title>Product</title>
+                                        </product>
+                                        <purchase_order module="ExternalLogistic">
+                                            <title>Purchase Order</title>
+                                        </purchase_order>
+
+
+                                        <sources module="ExternalLogistic">
+                                            <title>Sources</title>
+                                        </sources>
+                                        <streams module="ExternalLogistic">
+                                            <title>Streams</title>
+                                        </streams>
+                                        <history module="ExternalLogistic">
+                                            <title>View History</title>
+                                        </history>
+                                    </children>
+                                </externallogistic>
+                            </children>
+                        </erp>
+	                	
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <externallogistic module="ExternalLogistic">
+                                            <title>External Logistic</title>
+                                        </externallogistic>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        
+        <layout>
+            <updates>
+                <ExternalLogistic>
+                    <file>ExternalLogistic.xml</file>
+                </ExternalLogistic>
+            </updates>
+        </layout>
+        	    
+        <translate>
+            <modules>
+                <MDN_ExternalLogistic>
+                    <files>
+                        <default>MDN_ExternalLogistic.csv</default>
+                    </files>
+                </MDN_ExternalLogistic>
+            </modules>
+        </translate>
+        
+    </adminhtml>
+	
+	
+    <frontend>
+        <routers>
+            <ExternalLogistic>
+                <use>standard</use>
+                <args>
+                    <module>MDN_ExternalLogistic</module>
+                    <frontName>ExternalLogistic</frontName>
+                </args>
+            </ExternalLogistic>
+        </routers>
+
+        <layout>
+            <updates>
+                <ExternalLogistic>
+                    <file>ExternalLogistic.xml</file>
+                </ExternalLogistic>
+            </updates>
+        </layout>
+        
+        <translate>
+            <modules>
+                <MDN_ExternalLogistic>
+                    <files>
+                        <default>MDN_ExternalLogistic.csv</default>
+                    </files>
+                </MDN_ExternalLogistic>
+            </modules>
+        </translate>
+    </frontend>
+    
+    <admin>
+        <routers>
+            <ExternalLogistic>
+                <use>admin</use>
+                <args>
+                    <module>MDN_ExternalLogistic</module>
+                    <frontName>ExternalLogistic</frontName>
+                </args>
+            </ExternalLogistic>
+        </routers>
+    </admin>
+    
+    <default>
+        <externallogistic>
+            <misc>
+                <max>10</max>
+            </misc>
+        </externallogistic>
+    </default>
+    
+    <crontab>
+        <jobs>
+        	<!-- run every hours -->
+            <process_scheduled_streams>
+                <schedule>
+                    <cron_expr>0 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>ExternalLogistic/Observer::runScheduledStreams</model>
+                </run>
+            </process_scheduled_streams>
+        </jobs>
+    </crontab>
+    
+</config> 

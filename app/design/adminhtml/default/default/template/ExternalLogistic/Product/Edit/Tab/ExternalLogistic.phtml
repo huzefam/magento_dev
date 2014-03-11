@@ -1,0 +1,18 @@
+<div class="entry-edit">
+
+<div class="entry-edit-head">
+	<h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('External Logistic'); ?></h4> 
+</div>
+ <fieldset id="my-fieldset">
+	        <table cellspacing="0" class="form-list">
+	            <tr>
+	                <td class="label"><?php echo $this->__('Sent to logistic company'); ?></td>
+	                <td class="input-ele"><?php echo ($this->isSentToLogisticCompany() ? $this->__('Yes') : $this->__('No')); ?></td>
+	            </tr>
+	            <tr>
+	                <td class="label"><?php echo $this->__('Stream information'); ?></td>
+	                <td class="input-ele"><?php echo $this->getStreamInformation(); ?></td>
+	            </tr>
+			</table>
+	</fieldset>
+</div>

@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <externallogistic translate="label" module="ExternalLogistic">
+            <label>External Logistic</label>
+            <tab>ERP</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>500</sort_order>
+            <show_in_default>1</show_in_default>
+            <groups>
+
+                <!-- General settings -->
+                <misc>
+                    <label>Miscelaneous</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <fields>
+                        <developer_email translate="label">
+                            <label>Developper email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </developer_email>
+                        <stockmanager_email translate="label">
+                            <label>Stock manager email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </stockmanager_email>
+                        <max translate="label">
+                            <label>Max products to send at once</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </max>
+                        <send_to_logistic_when_status_set_to_waiting_for_delivery>
+                            <label>Send purchase order to logistic when status passed to Waiting for delivery</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </send_to_logistic_when_status_set_to_waiting_for_delivery>
+                        <use_shell_to_zip>
+                            <label>Use shell to zip</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </use_shell_to_zip>
+                    </fields>
+                </misc>
+
+                <!-- DropShipper Settings -->
+                <dropshipper>
+                    <label>Drop Shipper</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <fields>
+                        <is_enabled>
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_enabled>
+                        <stock_file_path translate="label">
+                            <label>Stock file path</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </stock_file_path>
+                        <send_order_to_email translate="label">
+                            <label>Send order to email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </send_order_to_email>
+                        <email_identity translate="label">
+                            <label>Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_identity>
+                        <email_template translate="label">
+                            <label>Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template>
+                        <warehouse>
+                            <label>Warehouse</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExternalLogistic/System_Config_Source_Warehouse</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </warehouse>
+                        <supplier>
+                            <label>Supplier</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExternalLogistic/System_Config_Source_Suppliers</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </supplier>
+                        <shipping_method>
+                            <label>Send orders with shipping method</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>ExternalLogistic/System_Config_Source_ShippingMethod</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </shipping_method>
+                    </fields>
+                </dropshipper>
+
+                <!-- L4 Logistic -->
+                <l4logistic>
+                    <label>L4 Logistic</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <fields>
+                        <is_enabled>
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_enabled>
+                        <ftp_host translate="label">
+                            <label>FTP Host</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </ftp_host>
+                        <ftp_port translate="label">
+                            <label>FTP Port</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </ftp_port>
+                        <ftp_login translate="label">
+                            <label>FTP Login</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </ftp_login>
+                        <ftp_password translate="label">
+                            <label>FTP Password</label>
+                            <frontend_type>password</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </ftp_password>
+                        <prefix translate="label">
+                            <label>Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </prefix>
+                        <customer_name translate="label">
+                            <label>Customer name (your company name)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                        </customer_name>
+                        <activity>
+                            <label>Activity</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>ExternalLogistic/System_Config_Source_L4logistic_Activity</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </activity>
+                        
+                    </fields>
+                </l4logistic>
+                
+            </groups>
+        </externallogistic>
+    </sections>
+</config>

@@ -1,0 +1,425 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Magestore_Giftwrap>
+			<version>3.2.0</version>
+		</Magestore_Giftwrap>
+	</modules>
+	<frontend>
+		<routers>
+			<giftwrap>
+				<use>standard</use>
+				<args>
+					<module>Magestore_Giftwrap</module>
+					<frontName>giftwrap</frontName>
+				</args>
+			</giftwrap>
+		</routers>
+		<translate>
+			<modules>
+				<Magestore_Giftwrap>
+					<files>
+						<default>Magestore_Giftwrap.csv</default>
+					</files>
+				</Magestore_Giftwrap>
+			</modules>
+		</translate>
+		<layout>
+			<updates>
+				<giftwrap>
+					<file>giftwrap.xml</file>
+				</giftwrap>
+			</updates>
+		</layout>
+		<events>			
+			<paypal_prepare_line_items>
+				<observers>
+					<magestore_giftwrap_paypal_prepare_line_items>
+						<type>singleton</type>
+						<class>giftwrap/giftwrap</class>
+						<method>paypal_prepare_line_items</method>
+					</magestore_giftwrap_paypal_prepare_line_items>
+				</observers>
+			</paypal_prepare_line_items>
+			
+			<controller_action_predispatch_checkout_cart_index>
+				<observers>
+					<magestore_giftwrap_controller_action_predispatch_checkout_cart_index>
+						<type>singleton</type>
+						<class>giftwrap/giftwrap</class>
+						<method>checkGiftwrap</method>
+					</magestore_giftwrap_controller_action_predispatch_checkout_cart_index>
+				</observers>
+			</controller_action_predispatch_checkout_cart_index>
+			<sales_quote_remove_item>
+				<observers>
+					<giftwrap_sales_quote_remove_item>
+						<type>singleton</type>
+						<class>giftwrap/giftwrap</class>
+						<method>updateGiftwrapBefore</method>
+					</giftwrap_sales_quote_remove_item>
+				</observers>
+			</sales_quote_remove_item>
+			<checkout_cart_update_items_after>
+				<observers>
+					<magestore_giftwrap_observer>
+						<type>singleton</type>
+						<class>giftwrap/giftwrap</class>
+						<method>updateGiftwrap</method>
+					</magestore_giftwrap_observer>
+				</observers>
+			</checkout_cart_update_items_after>
+			<!--<checkout_multishipping_controller_success_action>
+				<observers>
+					<sales_convert_quote>
+						<class>giftwrap/observer</class>
+						<method>addOrder</method>
+					</sales_convert_quote>
+				</observers>
+			</checkout_multishipping_controller_success_action>-->
+			<!-- sales_quote_merge_after>
+				<observers>
+					<magestore_giftwrap_observer>
+						<type>singleton</type>
+						<class>giftwrap/giftwrap</class>
+						<method>beforeMerge</method>
+					</magestore_giftwrap_observer>
+				</observers>
+			</sales_quote_merge_after-->
+			<sales_quote_remove_item>
+				<observers>
+					<magestore_giftwrap_observer_remove_item>
+						<type>singleton</type>
+						<class>giftwrap/giftwrap</class>
+						<method>removeItem</method>
+					</magestore_giftwrap_observer_remove_item>
+				</observers>
+			</sales_quote_remove_item>
+			<!-- <checkout_type_onepage_save_order_after> <observers> <magestore_giftwrap_observer> 
+				<type>singleton</type> <class>giftwrap/giftwrap</class> <method>afterSaveOrder</method> 
+				</magestore_giftwrap_observer> </observers> </checkout_type_onepage_save_order_after> -->
+			<sales_order_save_after>
+				<observers>
+					<magestore_giftwrap_observer>
+						<type>singleton</type>
+						<class>giftwrap/giftwrap</class>
+						<method>afterSaveOrder</method>
+					</magestore_giftwrap_observer>
+				</observers>
+			</sales_order_save_after>
+			<customer_login>
+				<observers>
+					<magestore_giftwrap_observer>
+						<type>singleton</type>
+						<class>giftwrap/giftwrap</class>
+						<method>afterSaveLogin</method>
+					</magestore_giftwrap_observer>
+				</observers>
+			</customer_login>
+			<!-- Hai.Ta -->
+        	<controller_action_predispatch_sales_order_reorder>
+				<observers>
+					<magestore_giftwrap_controller_action_predispatch_sales_order_reorder>
+						<type>singleton</type>
+						<class>giftwrap/observer</class>
+						<method>saveItemsBeforeReorder</method>
+					</magestore_giftwrap_controller_action_predispatch_sales_order_reorder>
+				</observers>
+			</controller_action_predispatch_sales_order_reorder>		 			
+			<!-- end Hai.Ta -->
+		</events>
+	</frontend>
+	<admin>
+		<routers>
+			<admingiftwrap>
+				<use>admin</use>
+				<args>
+					<module>Magestore_Giftwrap</module>
+					<frontName>admingiftwrap</frontName>
+				</args>
+			</admingiftwrap>
+		</routers>
+	</admin>
+	<adminhtml>
+		<layout>
+			<updates>
+				<giftwrap>
+					<file>giftwrap.xml</file>
+				</giftwrap>
+			</updates>
+		</layout>
+		<events>
+			<giftwrap_style_save_after>
+				<observers>
+						<giftwrap_style_delete_after>
+							<type>singleton</type>
+							<class>giftwrap/giftwrap</class>
+							<method>deleteSelection</method>
+						</giftwrap_style_delete_after>
+				</observers>
+			</giftwrap_style_save_after>
+			<giftwrap_giftcard_save_after>
+				<observers>
+						<giftwrap_giftcard_save_after>
+							<type>singleton</type>
+							<class>giftwrap/giftwrap</class>
+							<method>deleteSelectionGiftcard</method>
+						</giftwrap_giftcard_save_after>
+				</observers>
+			</giftwrap_giftcard_save_after>
+			<sales_order_save_after>
+				<observers>
+					<magestore_giftwrap_observer>
+						<type>singleton</type>
+						<class>giftwrap/observer</class>
+						<method>afterSaveOrder</method>
+					</magestore_giftwrap_observer>
+				</observers>
+			</sales_order_save_after>
+			<!-- Hai.Ta -->
+        	<controller_action_predispatch_adminhtml_sales_order_create_reorder>
+				<observers>
+					<magestore_giftwrap_controller_action_predispatch_adminhtml_sales_order_create_reorder>
+						<type>singleton</type>
+						<class>giftwrap/observer</class>
+						<method>saveSessionBeforeReorder</method>
+					</magestore_giftwrap_controller_action_predispatch_adminhtml_sales_order_create_reorder>
+				</observers>
+			</controller_action_predispatch_adminhtml_sales_order_create_reorder>				
+        	<controller_action_predispatch_adminhtml_sales_order_create_index>
+				<observers>
+					<magestore_giftwrap_controller_action_predispatch_adminhtml_sales_order_create_index>
+						<type>singleton</type>
+						<class>giftwrap/observer</class>
+						<method>saveAdminItemsReorder</method>
+					</magestore_giftwrap_controller_action_predispatch_adminhtml_sales_order_create_index>
+				</observers>
+			</controller_action_predispatch_adminhtml_sales_order_create_index>	
+			<!-- end Hai.Ta -->
+		</events>
+		<blocks>
+			<widget>
+				<rewrite>
+					<grid_massaction>Magestore_Giftwrap_Block_Adminhtml_Massaction</grid_massaction>
+				</rewrite>
+			</widget>
+		</blocks>
+	</adminhtml>
+	<global>
+		<models>
+			<giftwrap>
+				<class>Magestore_Giftwrap_Model</class>
+				<resourceModel>giftwrap_mysql4</resourceModel>
+			</giftwrap>
+			<giftwrap_mysql4>
+				<class>Magestore_Giftwrap_Model_Mysql4</class>
+				<entities>
+					<giftwrap>
+						<table>giftwrap</table>
+					</giftwrap>
+					<selection>
+						<table>giftwrap_selection</table>
+					</selection>
+					<giftcard>
+						<table>giftwrap_giftcard</table>
+					</giftcard>
+					<selectionitem>
+						<table>giftwrap_item</table>
+					</selectionitem>
+					<order>
+						<table>giftwrap_sales_order</table>
+					</order>
+				</entities>
+			</giftwrap_mysql4>
+
+			<!-- paypal>
+				<rewrite>
+					<cart>Magestore_Giftwrap_Model_Paypal_Cart</cart>
+				</rewrite>
+			</paypal-->
+			<sales>
+				<rewrite>
+					<order_pdf_invoice>Magestore_Giftwrap_Model_Sales_Order_Pdf_Invoice</order_pdf_invoice>
+				</rewrite>
+			</sales>
+			<sales>
+				<rewrite>
+					<order_pdf_shipment>Magestore_Giftwrap_Model_Sales_Order_Pdf_Shipment</order_pdf_shipment>
+				</rewrite>
+			</sales>
+			<shipping>
+				<rewrite>
+					<carrier_freeshipping>Magestore_Giftwrap_Model_Shipping_Carrier_Freeshipping</carrier_freeshipping>
+				</rewrite>
+			</shipping>
+			<checkout>
+				<rewrite>
+					<type_multishipping_state>Magestore_Giftwrap_Model_Multishipping_State</type_multishipping_state>
+				</rewrite>
+			</checkout>		
+		</models>
+		<resources>
+			<giftwrap_setup>
+				<setup>
+					<module>Magestore_Giftwrap</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</giftwrap_setup>
+			<giftwrap_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</giftwrap_write>
+			<giftwrap_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</giftwrap_read>
+		</resources>
+		<blocks>
+			<giftwrap>
+				<class>Magestore_Giftwrap_Block</class>
+			</giftwrap>
+			<!--Giftwarp filter King_211112-->
+			<!-- <adminhtml>
+				<rewrite>
+					<widget_grid_massaction>Magestore_Giftwrap_Block_Adminhtml_Massaction</widget_grid_massaction>
+					<sales_order_grid>Magestore_Giftwrap_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>					
+				</rewrite>
+			</adminhtml> -->
+		</blocks>
+		<helpers>
+			<giftwrap>
+				<class>Magestore_Giftwrap_Helper</class>
+			</giftwrap>
+		</helpers>
+		<sales>
+			<quote>
+				<totals>					
+					<giftwrap>
+						<class>giftwrap/sales_quote_address_total_giftwrap</class>
+						<after>tax</after>
+					</giftwrap>
+					<giftwraptax>
+						<class>giftwrap/sales_quote_address_total_giftwraptax</class>
+						<after>giftwrap</after>
+					</giftwraptax>
+					<admingiftwrap>
+						<class>giftwrap/sales_quote_address_total_admingiftwrap</class>
+						<before>grand_total</before>
+					</admingiftwrap> 
+				</totals>
+			</quote>
+			<order_invoice>
+				<totals>
+					<giftwrap>
+						<class>giftwrap/sales_order_invoice_total_giftwrap</class>
+					</giftwrap>
+				</totals>
+			</order_invoice>
+		</sales>
+		<fieldsets>
+            <sales_convert_quote_address>
+                <giftwrap_amount>
+                    <to_order>*</to_order>
+                </giftwrap_amount>
+                <giftwrap_tax>
+                    <to_order>*</to_order>
+                </giftwrap_tax>
+            </sales_convert_quote_address>
+        </fieldsets>
+		<pdf>
+			<totals>
+				<giftwrap translate="title">
+					<title>Giftwrap Amount</title>
+					<source_field>giftwrap_amount</source_field>
+					<model>giftwrap/order_pdf_amount</model>
+					<font_size>7</font_size>
+					<display_zero>0</display_zero>
+					<sort_order>450</sort_order>
+				</giftwrap>
+			</totals>
+			<giftwraptax translate="title">
+				<title>Giftwrap Tax</title>
+				<source_field>giftwrap_tax</source_field>
+				<model>giftwrap/order_pdf_giftwraptax</model>
+				<font_size>7</font_size>
+				<display_zero>0</display_zero>
+				<sort_order>451</sort_order>
+			</giftwraptax>
+		</pdf>
+	</global>
+	<default>
+		<giftwrap>
+			<general>
+				<active>1</active>
+				<giftwrap_template>pinky</giftwrap_template>
+				<all_item>1</all_item>
+				<show_icon>1</show_icon>
+				<decrease_price_wrapall>0</decrease_price_wrapall>
+				<amount_on_number_items>0</amount_on_number_items>
+				<maximum_items_wrapall>4</maximum_items_wrapall>
+				<icon_image>default/present.jpg</icon_image>
+				<use_urls>0</use_urls>
+				<confirm_delete>0</confirm_delete>
+				<use_card>1</use_card>
+			</general>
+			<message>
+				<product_giftwrap>This product can be gift wrapped. You can select
+					the paper and enter your message at the from your shopping cart.
+				</product_giftwrap>
+				<product_no_giftwrap>This product cannot be gift wrapped.
+				</product_no_giftwrap>
+				<all_item_giftwrap>This option allow you to gift wrap all items in
+					one pager with one personal message. Only items which are able to
+					wrapped will be wrapped</all_item_giftwrap>
+				<personal_message_disable_msg>Personal message is unavailable for
+					this style</personal_message_disable_msg>
+				<can_not_wrap_all>The maximum number of items to wrap all is
+				</can_not_wrap_all>
+			</message>
+			<tax>
+				<active>0</active>
+				<percent>10</percent>
+			</tax>
+            <note>
+                <first><![CDATA[Prepare your wrap in 3 simple steps:</br> 1. Select wrapping paper.]]></first>
+                <second><![CDATA[2. Choose a gift card.]]></second>
+                <third><![CDATA[3. Tell us if you want to choose more products on your shopping cart for wrapping.]]></third>
+                <first_hover><![CDATA[If you want to choose other products on your shopping cart for wrapping,</br>
+                        please tick the corresponding box(es) below.</br>
+						]]></first_hover>
+                <second_hover><![CDATA[If you want to wrap only this item,</br>
+                        please proceed to Save at the bottom of the page.</br>
+						]]></second_hover>
+                <third_hover><![CDATA[This shows how many items of a product ,</br>
+                        have already been wrapped over the total</br>
+						]]></third_hover>
+                <four_hover><![CDATA[This shows how many items of a product </br>
+                        have already been wrapped over the total]]></four_hover>
+                <five_hover><![CDATA[This is the qty you choose to be wrapped]]></five_hover>
+                <six_hover><![CDATA[If you want to wrap a product,</br>
+                        please tick the corresponding box.]]></six_hover>
+                <enable_note>1</enable_note>
+            </note>
+		</giftwrap>
+		<sales>
+			<totals_sort>
+				<giftwrap>60</giftwrap>
+				<giftwraptax>61</giftwraptax>
+			</totals_sort>
+		</sales>
+	</default>
+	<!--websites>
+		<admin>
+			<dev>
+				<debug>
+					<template_hints>1</template_hints>
+					<template_hints_blocks>1</template_hints_blocks>
+				</debug>
+			</dev>
+		</admin>
+	</websites-->
+</config>

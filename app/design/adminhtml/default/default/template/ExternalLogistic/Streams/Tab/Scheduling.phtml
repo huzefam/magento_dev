@@ -1,0 +1,23 @@
+<?php $_stream = $this->getStream(); ?>
+
+<div class="entry-edit">
+    <div class="entry-edit-head"> 
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Scheduling'); ?></h4>
+    </div>
+    <fieldset id="my-fieldset">
+        <table cellspacing="0" class="form-list">
+            <tr>
+                <td class="label"><?php echo $this->__('Is schedule at '); ?> <?php echo date('Y-m-d H:i', Mage::getModel('core/date')->timestamp()); ?></td>
+                <td class="input-ele"><?php echo ($_stream->isCurrentlyScheduled() ? 'Yes' : 'No'); ?></td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <?php echo $this->__('Schedule'); ?>
+                </td>
+                <td>
+                    <textarea name="data[els_schedule_values]" id="data[els_schedule_values]" cols="50" rows="10"><?php echo $_stream->getScheduledValues(); ?></textarea>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</div>

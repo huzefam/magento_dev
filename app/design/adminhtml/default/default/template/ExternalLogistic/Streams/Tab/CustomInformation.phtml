@@ -1,0 +1,31 @@
+<div class="entry-edit">
+    <div class="entry-edit-head"> 
+	    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Custom information'); ?></h4> 
+    </div>
+    <fieldset id="my-fieldset">
+        <div class="grid">
+	        <table class="data" cellspacing="0" width="100%">
+	        	<thead>
+	                <tr class="headings">
+						<th class="a-center"><?php echo $this->__('Name'); ?></th>
+						<th class="a-center"><?php echo $this->__('Code'); ?></th>
+						<th class="a-center"><?php echo $this->__('Input type'); ?></th>
+						<th class="a-center"><?php echo $this->__('Value'); ?></th>				
+						<th class="a-center"><?php echo $this->__('Delete'); ?></th>				
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($this->getCustomInformation() as $information): ?>
+						<tr>
+							<td class="a-center"><input type="text" id="custom[<?php echo $information->getId(); ?>][elci_name]" name="custom[<?php echo $information->getId(); ?>][elci_name]" value="<?php echo $information->getelci_name(); ?>"></td>
+							<td class="a-center"><input type="text" id="custom[<?php echo $information->getId(); ?>][elci_code]" name="custom[<?php echo $information->getId(); ?>][elci_code]" value="<?php echo $information->getelci_code(); ?>"></td>
+							<td class="a-center"><?php echo $this->getInputTypeAsCombo('custom['.$information->getId().'][elci_input_type]', $information->getelci_input_type()); ?></td>
+							<td class="a-center"><input type="text" id="custom[<?php echo $information->getId(); ?>][elci_value]" name="custom[<?php echo $information->getId(); ?>][elci_value]" value="<?php echo $information->getelci_value(); ?>"></td>
+							<td class="a-center"><input type="checkbox" id="custom[<?php echo $information->getId(); ?>][delete]" name="custom[<?php echo $information->getId(); ?>][delete]" value="1"></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+	        </table>
+	    </div>
+    </fieldset>
+</div>
