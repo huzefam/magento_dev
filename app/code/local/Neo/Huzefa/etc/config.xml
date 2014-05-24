@@ -51,6 +51,11 @@
         </huzefa>
 
     </models-->
+   <blocks>
+            <huzefa>
+                <class>Neo_Huzefa_Block</class>
+            </huzefa>
+        </blocks>
         
      </global>
 

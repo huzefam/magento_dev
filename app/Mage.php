@@ -444,6 +444,7 @@ final class Mage
     public static function dispatchEvent($name, array $data = array())
     {
         Varien_Profiler::start('DISPATCH EVENT:'.$name);
+         Mage::log($name,false,'test.log');
         $result = self::app()->dispatchEvent($name, $data);
         Varien_Profiler::stop('DISPATCH EVENT:'.$name);
         return $result;

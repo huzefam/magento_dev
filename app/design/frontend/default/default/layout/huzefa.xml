@@ -7,7 +7,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="core/template" name="huzefa.index" template="huzefa/product/addproduct.phtml" />
+            <block type="huzefa/huzefa" name="huzefa.index" template="huzefa/product/addproduct.phtml" />
         </reference>
     </huzefa_index_index>
 

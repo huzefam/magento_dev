@@ -9,6 +9,6 @@
         <reference name="content">
             <block type="core/template" name="huzefa.index" template="huzefa/product/addproduct.phtml" />
         </reference>
-    </giftwrap_index_giftbox>
+    </huzefa_index_index>
 
 </layout>

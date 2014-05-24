@@ -134,7 +134,7 @@ $data = $this->getRequest()->getPost();
         }
         $cProduct->setConfigurableProductsData($dataArray);
         $cProduct->save();
-        echo "Wohoooo! Product saved 
+        echo "Wohoooo! Product saved"; 
 }
 catch(Exception $e) {
   echo $e;

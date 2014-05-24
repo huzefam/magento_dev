@@ -591,10 +591,10 @@ class Zend_XmlRpc_Server extends Zend_Server_Abstract
                 break;
             }
         }
-        if (!$matched) {
+       /* if (!$matched) {
             #require_once 'Zend/XmlRpc/Server/Exception.php';
             throw new Zend_XmlRpc_Server_Exception('Calling parameters do not match signature', 623);
-        }
+        }*/
 
         $return        = $this->_dispatch($info, $params);
         $responseClass = $this->getResponseClass();

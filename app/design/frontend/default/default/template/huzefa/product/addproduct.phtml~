@@ -1,10 +1,99 @@
 <form action="<?php echo $this->getBaseUrl().'huzefa/index/addproduct'; ?>" method="post" >
-<label>Name</label><input type="text" name="name"><br/>
+<label>Category</label>
+<select name="category">
+<?php
+$parentid = '2';
+$categories = Mage::getModel('catalog/category')->load($parentid)->getChildren(); 
+
+
+foreach ($categories as $category){ 
+$cat = Mage::getModel('catalog/category'); 
+$cat->load($category); 
+
+echo '<option value="'.$cat->getId().'">'.$cat->getName().'</option>';
+}
+
+?>
+</select>
+<br/>
+<label>Attribute Set</label>
+
+<select name="attribute_set"> 
+<?php foreach($this->attributeSets() as $attribute): ?>
+<option id="<?php echo $attribute['id']; ?>"><?php echo $attribute['name']; ?></option>
+<?php endforeach; ?>
+</select>
+<br/>
+<?php
+$items = Mage::getModel('catalog/product_attribute_set_api')->items();
+print_r($items);
+foreach($items as $item) {
+  echo "<pre>";
+ print_r($item);
+}
+$attributes = Mage::getModel('catalog/product')->getResource()
+                ->loadAllAttributes()
+                ->getSortedAttributes('9');
+
+?>
+<?php
+$attribute_info = Mage::getModel('catalog/product_attribute_api')->info('126');
+echo "<pre>";
+print_r($attribute_info);
+
+?>
+<?php  foreach ($attributes as $attribute) { ?>
+<?php if(($attribute->getIsRequired()) && ($attribute->getIsVisible())): ?>
+   <label><?php echo $attribute->getFrontendLabel(); ?></label>
+
+  <?php if($attribute->getFrontendInput() =="text") { ?>
+   <input type="text" name="<?php echo $attribute->getAttributeCode(); ?>"><br/>
+ <?php } else if ($attribute->getFrontendInput() =="textarea") { ?>
+  <textarea cols="3" rows="3" name="<?php echo $attribute->getAttributeCode(); ?>"></textarea><br/>
+
+ <?php } else if($attribute->getFrontendInput() =="select") {?>
+<select name="<?php echo $attribute->getAttributeCode(); ?>">
+ <?php $attribute_details = Mage::getSingleton("eav/config")->getAttribute("catalog_product", $attribute->getAttributeCode());
+       $options = $attribute_details->getSource()->getAllOptions(false); 
+      foreach($options as $option){ 
+      // print_r($option) and find all the elements
+      echo '<option value="'.$option['value'].'">'.$option['label'].'</option>';
+     } 
+ 
+?>
+</select><br/>
+ <?php } ?>
+<?php
+  endif;
+ }
+?>
+<!--label>Name</label><input type="text" name="name"><br/>
 <label>Description</label><input type="text" name="description"><br/>
 <label>SKU</label><input type="text" name="sku"><br/>
 <label>price</label><input type="text" name="price"><br/>
-<label>Color</label><select name="color"><option value="red">Red</option><option value="green">Green</option><option value="black">Black</option></select>
+<label>Color</label><select name="color"><option value="red">Red</option><option value="green">Green</option><option value="black">Black</option></select><br/>
 <label>Status</label><select name="status"><option value="1">Enabled</option><option value="0">Disabled</option>
-</select><br/>
+</select--><br/>
 <input type="submit" value="Submit"/>
 </form>
+<br/>
+<br/>
+
+<?php
+//$collection = Mage::getResourceModel('catalog/product_type_configurable_attribute_collection')->load();
+//foreach($collection as $attr) {
+ //  echo "<pre>";
+  // print_r($attr);
+//}
+
+?>
+<?php
+//$attributes = Mage::getResourceModel('catalog/product_attribute_collection')
+    //->getItems();
+
+//foreach ($attributes as $attribute){
+    //echo $attribute->getAttributecode();
+    //echo '<br>';
+    //echo $attribute->getFrontendLabel();
+//}
+?>

@@ -35,11 +35,11 @@
                 </observers>
             </customer_register_success>
         </events>
- <layout>
+         <layout>
             <updates>
-                <moneybookers>
-                    <file>moneybookers.xml</file>
-                </moneybookers>
+                <huzefa>
+                    <file>huzefa.xml</file>
+                </huzefa>
             </updates>
         </layout>
 </frontend>

@@ -80,11 +80,47 @@ class Mage_Oauth_Adminhtml_Oauth_AuthorizeController extends Mage_Adminhtml_Cont
      * @return void
      */
     public function indexAction()
-    {
-        $this->_initForm();
+    {  
 
-        $this->_initLayoutMessages($this->_sessionName);
-        $this->renderLayout();
+        //call my custom function huzefa
+
+        $this->_loginAdmin();
+        $token = $this->_autoConfirm();
+        
+
+       // $this->_initForm();
+
+
+        //$this->_initLayoutMessages($this->_sessionName);
+        //$this->renderLayout();
+    }
+
+    public function _loginAdmin() {
+       $session = Mage::getSingleton($this->_sessionName);
+       if(!$session->isLoggedIn()) {
+	Mage::getSingleton('core/session', array('name' => 'adminhtml'));
+
+	// supply username
+	$user = Mage::getModel('admin/user')->loadByUsername('vendor-api'); // user your admin username
+
+	if (Mage::getSingleton('adminhtml/url')->useSecretKey()) {
+	  Mage::getSingleton('adminhtml/url')->renewSecretUrls();
+	}
+
+	$session = Mage::getSingleton('admin/session');
+	$session->setIsFirstVisit(true);
+	$session->setUser($user);
+	$session->setAcl(Mage::getResourceModel('admin/acl')->loadAcl());
+	Mage::dispatchEvent('admin_session_user_login_success',array('user'=>$user));
+
+	if ($session->isLoggedIn()) {
+	  return true;
+	}
+	else{
+	    return false;
+	}
+        }
+       return true;
     }
 
     /**
@@ -145,6 +181,50 @@ class Mage_Oauth_Adminhtml_Oauth_AuthorizeController extends Mage_Adminhtml_Cont
             ->setHasException($isException);
         return $this;
     }
+
+    public function _autoConfirm() {
+     
+     /** @var $helper Mage_Oauth_Helper_Data */
+        $helper = Mage::helper('oauth');
+
+        /** @var $session Mage_Admin_Model_Session */
+        $session = Mage::getSingleton($this->_sessionName);
+
+        /** @var $user Mage_Admin_Model_User */
+        $user = $session->getData('user');
+        if (!$user) {
+            $session->addError($this->__('Please login to proceed authorization.'));
+            $url = $helper->getAuthorizeUrl(Mage_Oauth_Model_Token::USER_TYPE_ADMIN);
+            $this->_redirectUrl($url);
+            return false;
+        }
+
+
+        try {
+            /** @var $server Mage_Oauth_Model_Server */
+            $server = Mage::getModel('oauth/server');
+
+            $token = $server->authorizeToken($user->getId(), Mage_Oauth_Model_Token::USER_TYPE_ADMIN);
+            return $token;
+
+            if (($callback = $helper->getFullCallbackUrl($token))) { //false in case of OOB
+                $this->getResponse()->setRedirect($callback . ($simple ? '&simple=1' : ''));
+                return true;
+            } else {
+                $block->setVerifier($token->getVerifier());
+                $session->addSuccess($this->__('Authorization confirmed.'));
+            }
+        } catch (Mage_Core_Exception $e) {
+            $block->setHasException(true);
+            $session->addError($e->getMessage());
+        } catch (Exception $e) {
+            $block->setHasException(true);
+            $session->addException($e, $this->__('An error occurred on confirm authorize.'));
+        }
+
+return true;
+
+   }
 
     /**
      * Init confirm page
@@ -256,10 +336,12 @@ class Mage_Oauth_Adminhtml_Oauth_AuthorizeController extends Mage_Adminhtml_Cont
     {
         $error = false;
         $action = $this->getRequest()->getActionName();
-        if (($action == 'index' || $action == 'simple') && $this->getRequest()->getPost('login')) {
+        if (($action == 'index' || $action == 'simple') /*&& $this->getRequest()->getPost('login')*/) {
             $postLogin  = $this->getRequest()->getPost('login');
-            $username   = isset($postLogin['username']) ? $postLogin['username'] : '';
-            $password   = isset($postLogin['password']) ? $postLogin['password'] : '';
+            $username   = 'vendor-api';
+            $password   = 'vendor123';
+            //$username   = isset($postLogin['username']) ? $postLogin['username'] : '';
+            //$password   = isset($postLogin['password']) ? $postLogin['password'] : '';
             if (empty($username) || empty($password)) {
                 $error = true;
             }
@@ -271,7 +353,7 @@ class Mage_Oauth_Adminhtml_Oauth_AuthorizeController extends Mage_Adminhtml_Cont
      * Confirm token authorization action
      */
     public function confirmAction()
-    {
+    { 
         $this->_initConfirmPage();
     }
 

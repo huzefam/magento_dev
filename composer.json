@@ -1,23 +1,22 @@
 {
-    "name": "zeljkoprsa/waterlee-boilerplate",
+    "name": "ivanchepurnyi/ecomdev_phpunit",
+    "license": "OSL-3.0",
     "type": "magento-module",
-    "license":"GPL v2.0",
-    "description":"Magento HTML5 Responsive Theme Boilerplate",
+    "description": "Magento PHPUnit Integration",
+    "homepage": "http://www.ecomdev.org/shop/code-testing/php-unit-test-suite.html",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*",
+        "phpunit/phpunit": "3.7.*"
+    },
+    "require-dev": {
+        "ecomdev/mage-ci": "dev-master"
+    },
     "authors":[
         {
-            "name":"Željko Prša",
-            "email":"info@jakesharp.co"
+            "name":"Ivan Chepurnyi"
         }
     ],
-    "require": {
-        "magento-hackathon/magento-composer-installer": "*"
-    },
     "extra": {
-        "map": [
-            ["app/code/community/JakeSharp/Waterlee", "app/code/community/JakeSharp/Waterlee"],
-            ["app/design/frontend/waterlee-boilerplate", "app/design/frontend/waterlee-boilerplate"],
-            ["app/etc/modules/JakeSharp_Waterlee.xml", "app/etc/modules/JakeSharp_Waterlee.xml"],
-            ["skin/frontend/waterlee-boilerplate", "skin/frontend/waterlee-boilerplate"]
-        ]
+        "magento-root-dir": "tests/magento"
     }
 }

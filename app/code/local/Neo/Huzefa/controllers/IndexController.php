@@ -79,7 +79,7 @@ $data = $this->getRequest()->getPost();
                        'price' => 1200,
                        'tax_class_id' => 0,
                 );
-    foreach($productData as $key =&gt; $value)
+    foreach($productData as $key => $value)
     {
     	$cProduct->setData($key,$value);
     }
